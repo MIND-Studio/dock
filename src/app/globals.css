@@ -1,0 +1,177 @@
+@import "tailwindcss";
+/* Direct path (not the "@mind-studio/ui/styles.css" exports subpath) so Tailwind's
+   CSS @import resolver finds the file on disk under node_modules. */
+@import "../../node_modules/@mind-studio/ui/dist/styles.css";
+
+/* Generate utilities for the class names used inside the @mind-studio/ui components. */
+@source "../../node_modules/@mind-studio/ui/dist";
+
+/*
+ * mind-home — the "personal command center" look: @mind-studio/ui Mind brand (teal,
+ * dark) elevated with a distinctive type system, a teal aurora atmosphere,
+ * a fine grain, and orchestrated entrance motion.
+ */
+
+:root {
+  --font-display: var(--font-fraunces), "Iowan Old Style", Georgia, serif;
+  --font-body: var(--font-hanken), ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-jb), ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+/* Make the @mind-studio/ui component utilities (font-sans / font-mono) use our type. */
+@theme inline {
+  --font-sans: var(--font-body);
+  --font-mono: var(--font-mono);
+}
+
+html,
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  min-height: 100vh;
+}
+
+/* ---- atmosphere ---------------------------------------------------------- */
+
+/* A slow teal aurora that gives the dark surface depth. */
+.aurora {
+  position: fixed;
+  inset: -20vh -10vw;
+  z-index: -2;
+  pointer-events: none;
+  background:
+    radial-gradient(38vw 30vw at 18% 8%, color-mix(in oklch, var(--primary) 26%, transparent), transparent 62%),
+    radial-gradient(34vw 28vw at 88% 0%, color-mix(in oklch, oklch(0.7 0.13 210) 20%, transparent), transparent 60%),
+    radial-gradient(46vw 36vw at 60% 108%, color-mix(in oklch, var(--primary) 14%, transparent), transparent 64%);
+  filter: blur(8px) saturate(125%);
+  animation: auroraDrift 24s ease-in-out infinite alternate;
+}
+@keyframes auroraDrift {
+  0% { transform: translate3d(0, 0, 0) scale(1); }
+  100% { transform: translate3d(-2.5vw, 2vh, 0) scale(1.06); }
+}
+
+/* Fine film grain, masked toward the center so edges stay clean. */
+.grain {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
+  opacity: 0.05;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+::selection {
+  background: color-mix(in oklch, var(--primary) 26%, transparent);
+}
+
+:where(button, a, [tabindex]):focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 2px;
+  border-radius: 8px;
+}
+
+/* ---- type helpers -------------------------------------------------------- */
+
+.font-display {
+  font-family: var(--font-display);
+  font-optical-sizing: auto;
+  letter-spacing: -0.015em;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.26em;
+  color: var(--muted-foreground);
+}
+
+/* ---- motion -------------------------------------------------------------- */
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.reveal {
+  opacity: 0;
+  animation: fadeUp 0.7s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes floatY {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+.float-y { animation: floatY 7s ease-in-out infinite; }
+
+@keyframes softPulse {
+  0%, 100% { opacity: 0.45; }
+  50% { opacity: 1; }
+}
+.soft-pulse { animation: softPulse 1.8s ease-in-out infinite; }
+
+@keyframes shimmer {
+  100% { background-position: 200% 0; }
+}
+.skeleton {
+  background: linear-gradient(
+    100deg,
+    color-mix(in oklch, var(--muted) 60%, transparent) 30%,
+    color-mix(in oklch, var(--foreground) 8%, transparent) 50%,
+    color-mix(in oklch, var(--muted) 60%, transparent) 70%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s linear infinite;
+}
+
+/* ---- the app tile (a physical-feeling object) ---------------------------- */
+
+.tile {
+  position: relative;
+  border-radius: 1.1rem;
+  border: 1px solid var(--border);
+  background:
+    linear-gradient(180deg, color-mix(in oklch, var(--card) 92%, white 4%), var(--card));
+  box-shadow:
+    inset 0 1px 0 0 color-mix(in oklch, white 7%, transparent),
+    0 1px 2px rgba(0, 0, 0, 0.3);
+  transition: transform 0.22s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.22s ease,
+    border-color 0.22s ease;
+}
+.tile:hover {
+  transform: translateY(-4px);
+  border-color: color-mix(in oklch, oklch(0.72 0.13 var(--h, 165)) 55%, transparent);
+  box-shadow:
+    inset 0 1px 0 0 color-mix(in oklch, white 9%, transparent),
+    0 14px 34px -16px color-mix(in oklch, oklch(0.72 0.13 var(--h, 165)) 70%, transparent),
+    0 2px 6px rgba(0, 0, 0, 0.35);
+}
+.tile-arrow {
+  transition: transform 0.22s ease, opacity 0.22s ease;
+  opacity: 0;
+  transform: translate(-3px, 3px);
+}
+.group:hover .tile-arrow {
+  opacity: 1;
+  transform: translate(0, 0);
+}
+
+.glass-panel {
+  background: color-mix(in oklch, var(--card) 86%, transparent);
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  border: 1px solid var(--border);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .aurora, .reveal, .float-y, .soft-pulse, .skeleton, .tile, .tile-arrow {
+    animation: none !important;
+    transition: none !important;
+  }
+  .reveal { opacity: 1; }
+}

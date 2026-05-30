@@ -7,7 +7,7 @@ node_modules
 
 # Local pod / indexer / build state — never belongs in an image.
 .css-data
-.home-data
+.dock-data
 .drive-data
 .builder-data
 .indexer-data

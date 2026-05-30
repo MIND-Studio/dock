@@ -11,7 +11,7 @@ const body = Hanken_Grotesk({ subsets: ["latin"], variable: "--font-hanken", dis
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-jb", display: "swap" });
 
 export const metadata: Metadata = {
-  title: "Mind Home — your pod, all in one place",
+  title: "Mind Dock — your pod, all in one place",
   description:
     "The front door to your Mind pod: open your apps, manage your profile and account. Your data stays yours.",
 };
@@ -24,7 +24,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           theme={mind}
           defaultTheme="dark"
           enableSystem={false}
-          storageKey="mind-home-theme-v1"
+          storageKey="mind-dock-theme-v1"
         >
           <div className="aurora" aria-hidden />
           <div className="grain" aria-hidden />

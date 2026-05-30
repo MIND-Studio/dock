@@ -17,7 +17,7 @@ export default function CallbackPage() {
         console.error("OIDC callback failed", err);
       }
       if (!cancelled) {
-        router.replace("/home");
+        router.replace("/dock");
       }
     })();
     return () => {

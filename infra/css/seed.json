@@ -1,6 +1,6 @@
 [
   {
-    "email": "alice@mind-home.local",
+    "email": "alice@mind-dock.local",
     "password": "dev-only-do-not-use-in-prod",
     "pods": [{ "name": "alice" }]
   }

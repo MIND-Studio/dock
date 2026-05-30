@@ -1,13 +1,13 @@
-# mind-home-v0 — dev compose
+# mind-dock-v0 — dev compose
 #
 # A local CommunitySolidServer v7 instance on :3082 hosting the demo persona
-# (alice). mind-home itself runs on :3080 (npm run dev). Ports use 308x to
+# (alice). mind-dock itself runs on :3080 (npm run dev). Ports use 308x to
 # coexist with siblings; :3081/:3083 belong to mind-hermes, so CSS is :3082.
 
 services:
   css:
     image: solidproject/community-server:latest
-    container_name: mind-home-css
+    container_name: mind-dock-css
     ports:
       - "3082:3082"
     volumes:

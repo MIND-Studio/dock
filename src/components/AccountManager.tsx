@@ -124,7 +124,7 @@ export function AccountManager({
       </p>
 
       <div>
-        <Button variant="outline" size="sm" onClick={onSignOut}>Sign out of Mind Home</Button>
+        <Button variant="outline" size="sm" onClick={onSignOut}>Sign out of Mind Dock</Button>
       </div>
     </div>
   );
@@ -150,7 +150,7 @@ function AccountLogin({
           <h3 className="text-sm font-semibold">Manage your account</h3>
           <p className="mt-1 text-xs text-muted-foreground">
             Sign in to your pod account at <span className="font-mono">{hostOf(issuer)}</span> to manage pods,
-            identities, and app credentials. This is separate from signing in to Mind Home.
+            identities, and app credentials. This is separate from signing in to Mind Dock.
           </p>
         </div>
         <div className="grid gap-1.5">

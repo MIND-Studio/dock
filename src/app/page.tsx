@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import { MindLoginCard, writeLastIdentity } from "@mind-studio/core";
 import { useSession } from "@/lib/solid/session";
 import { oidcIssuer, APP_NAME, ACCENT } from "@/lib/config";
-import { hueFor } from "@/lib/home/accents";
+import { hueFor } from "@/lib/dock/accents";
 import { BrandMark } from "@/components/TopBar";
 
 const MOCK = [
@@ -27,7 +27,7 @@ export default function LandingPage() {
         webId: webid,
         displayName: webid.split("/").filter(Boolean).pop(),
       });
-      router.replace("/home");
+      router.replace("/dock");
     }
   }, [loading, loggedIn, webid, router]);
 
@@ -35,7 +35,7 @@ export default function LandingPage() {
     <main className="mx-auto flex min-h-screen max-w-5xl flex-col px-6 pb-16">
       <header className="reveal flex items-center gap-2.5 py-7">
         <BrandMark />
-        <span className="font-display text-lg font-semibold tracking-tight">Mind Home</span>
+        <span className="font-display text-lg font-semibold tracking-tight">Mind Dock</span>
       </header>
 
       <section className="grid flex-1 items-center gap-12 lg:grid-cols-[1.05fr_1fr]">
@@ -47,7 +47,7 @@ export default function LandingPage() {
             <span className="text-primary">all in one place.</span>
           </h1>
           <p className="mt-5 max-w-md text-[15px] leading-relaxed text-muted-foreground sm:text-lg">
-            One calm home for everything you use — open your apps, manage your profile,
+            One calm place for everything you use — open your apps, manage your profile,
             look after your account.{" "}
             <span className="font-medium text-foreground">Your data stays yours.</span>
           </p>
@@ -65,7 +65,7 @@ export default function LandingPage() {
               {loading
                 ? "Getting things ready…"
                 : webid
-                  ? "You’re signed in — taking you home…"
+                  ? "You’re signed in — taking you to your dock…"
                   : "Sign in safely with your own account. No new password to remember."}
             </p>
           </div>
@@ -77,7 +77,7 @@ export default function LandingPage() {
               <span className="size-2.5 rounded-full bg-destructive/50" />
               <span className="size-2.5 rounded-full bg-primary/40" />
               <span className="size-2.5 rounded-full bg-primary/25" />
-              <span className="ml-2 font-mono text-[10px] text-muted-foreground">mind home</span>
+              <span className="ml-2 font-mono text-[10px] text-muted-foreground">mind dock</span>
             </div>
             <div className="px-5 pt-5">
               <p className="eyebrow mb-2">Your space</p>

@@ -28,7 +28,7 @@ permissions:
 
 env:
   REGISTRY: ghcr.io
-  IMAGE_NAME: mind-home
+  IMAGE_NAME: mind-dock
 
 jobs:
   build:
@@ -82,7 +82,7 @@ jobs:
           REF="${IMAGE_LC}@${{ steps.push.outputs.digest }}"
           echo "Pinned image: ${REF}"
           {
-            echo "### mind-home image"
+            echo "### mind-dock image"
             echo '```'
             echo "MIND_DOCK_IMAGE=${REF}"
             echo '```'

@@ -64,12 +64,12 @@ export function TopBar({
   return (
     <header className="sticky top-0 z-30 border-b border-[color:var(--border)] glass-panel">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-3.5">
-        <Link href="/home" className="flex items-center gap-2.5">
+        <Link href="/dock" className="flex items-center gap-2.5">
           <BrandMark />
-          <span className="font-display text-[19px] font-semibold tracking-tight">Mind Home</span>
+          <span className="font-display text-[19px] font-semibold tracking-tight">Mind Dock</span>
         </Link>
         <div className="flex items-center gap-1">
-          <MindAppLauncher podRoot={podRoot ?? undefined} podFetch={podFetch} manageHref="/home" />
+          <MindAppLauncher podRoot={podRoot ?? undefined} podFetch={podFetch} manageHref="/dock" />
           <ThemeToggle />
           <DropdownMenu>
             <DropdownMenuTrigger asChild>
@@ -87,7 +87,7 @@ export function TopBar({
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>
-                <Link href="/home">Home</Link>
+                <Link href="/dock">Dock</Link>
               </DropdownMenuItem>
               <DropdownMenuItem asChild>
                 <Link href="/settings">Settings</Link>

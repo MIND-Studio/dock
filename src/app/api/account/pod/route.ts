@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
 import { createPod, CssApiError } from "@/lib/solid/css-account";
-import { getSession } from "@/lib/home/account-session";
+import { getSession } from "@/lib/dock/account-session";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

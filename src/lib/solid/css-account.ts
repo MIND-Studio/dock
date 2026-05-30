@@ -2,7 +2,7 @@ import "server-only";
 
 /**
  * Minimal server-side client for the CommunitySolidServer v7 account API
- * (`/.account/`). mind-home holds the user's OIDC/WebID session in the browser,
+ * (`/.account/`). mind-dock holds the user's OIDC/WebID session in the browser,
  * but managing the *account* (pods, linked WebIDs, client credentials) needs the
  * separate account credential + a pod-origin cookie. We do that here, server-side,
  * with a cookie jar — never exposing the account cookie to the browser.

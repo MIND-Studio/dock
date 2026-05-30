@@ -1,6 +1,6 @@
 # syntax=docker/dockerfile:1.7
 #
-# Production image for mind-home (the "dock"). Two stages:
+# Production image for mind-dock (the "dock"). Two stages:
 #   builder — installs deps (incl. C toolchain for better-sqlite3) and runs
 #             `next build` to emit .next/standalone.
 #   runtime — minimal Debian-slim running the standalone server as non-root.

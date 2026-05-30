@@ -6,7 +6,7 @@
 /out/
 
 # local state (never commit)
-/.home-data/
+/.dock-data/
 /.css-data/
 
 # env (keep .env.example)

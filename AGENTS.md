@@ -2,9 +2,9 @@
 
 This version (16.2.6) has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 
-# mind-home-v0 — agent rules
+# mind-dock-v0 — agent rules
 
-The **branded front door** to a user's Solid pod: a home with an **app launcher**
+The **branded front door** to a user's Solid pod: an **app launcher**
 (tiles to the sibling Mind apps), a **profile** editor, and **account management**
 (pods, linked WebIDs, client credentials). It is the React hub that sits *around*
 the (server-rendered, separately-themed) CommunitySolidServer login/consent pages.
@@ -19,7 +19,7 @@ the (server-rendered, separately-themed) CommunitySolidServer login/consent page
   management (pods/WebIDs/credentials). Held **server-side**: `/api/account/*`
   routes log into the CSS account with a cookie jar (see
   `src/lib/solid/css-account.ts`), store the cookie encrypted in sqlite
-  (`src/lib/home/account-session.ts`), and proxy operations. **Never** expose the
+  (`src/lib/dock/account-session.ts`), and proxy operations. **Never** expose the
   CSS account cookie to the browser; never log it.
 
 CSS v7's account API has **no** control to revoke authorized OIDC apps (its keys are
@@ -32,7 +32,7 @@ Uses the shared **`@mind-studio/ui`** on the **default Mind brand** (teal-green)
 default. `globals.css` does `@import "../../node_modules/@mind-studio/ui/dist/styles.css"` +
 `@source "../../node_modules/@mind-studio/ui/dist"`; `layout.tsx` sets
 `<html data-mind-theme="mind">` + `<ThemeProvider theme={mind} defaultTheme="dark"
-enableSystem={false} storageKey="mind-home-theme-v1">`. Build UI from `@mind-studio/ui`
+enableSystem={false} storageKey="mind-dock-theme-v1">`. Build UI from `@mind-studio/ui`
 components. Consumed as packed tarballs (`@mind-studio/ui` = `../../ui/mind-studio-ui-0.1.0.tgz`,
 `@mind-studio/core` = `../mind-shared-ui/...tgz`); after changing those, rebuild + pack +
 `npm install <tgz>`. See memory `mind_ui_consumption_gotchas`.
@@ -44,7 +44,10 @@ say "your account", "your apps", "your profile", "your private space".
 
 - Profile: `{pod}/profile/card#me` (`foaf:name`, `vcard:note`, `vcard:hasPhoto`).
 - App launcher registry: `{pod}/home/apps.ttl` (vocab `http://mind.example/voc#App`).
-- The sqlite store (`.home-data/`) holds ONLY the server-side CSS account session
+  The `/home/` path is fixed by `@mind-studio/core` (`apps/registry.js`) and is the
+  same across all consumers — it stays `/home/` even though this app is now Dock.
+  Renaming it is a cross-cutting change in core, not here.
+- The sqlite store (`.dock-data/`) holds ONLY the server-side CSS account session
   (encrypted cookie) — a transient auth convenience, never user content.
 
 ## Never log

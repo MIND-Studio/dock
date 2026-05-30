@@ -9,7 +9,7 @@ import {
   type Session,
 } from "@inrupt/solid-client-authn-browser";
 
-const APP_NAME = "Mind Home";
+const APP_NAME = "Mind Dock";
 
 /**
  * Client-side Inrupt session hook. Restores session via

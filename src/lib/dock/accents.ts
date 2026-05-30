@@ -1,6 +1,6 @@
 /**
- * A curated, low-chroma hue per app so the launcher reads like a real home
- * screen without becoming a rainbow. Returns an oklch hue angle; the tile sets
+ * A curated, low-chroma hue per app so the launcher reads like a real dock
+ * without becoming a rainbow. Returns an oklch hue angle; the tile sets
  * it as `--h` and derives icon tint + hover glow from it. Custom apps get a
  * stable hue hashed from their key.
  */

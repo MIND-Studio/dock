@@ -9,17 +9,17 @@ import {
   randomBytes,
 } from "node:crypto";
 import Database from "better-sqlite3";
-import { homeDataDir, accountEncryptionKey } from "@/lib/env";
+import { dockDataDir, accountEncryptionKey } from "@/lib/env";
 import type { AccountSession } from "@/lib/solid/css-account";
 
 // --- sqlite singleton (survives Next dev hot-reload) -----------------------
 
-const g = globalThis as unknown as { __homeAccountDb?: Database.Database };
+const g = globalThis as unknown as { __dockAccountDb?: Database.Database };
 
 function db(): Database.Database {
-  if (g.__homeAccountDb) return g.__homeAccountDb;
-  if (!existsSync(homeDataDir)) mkdirSync(homeDataDir, { recursive: true });
-  const conn = new Database(join(homeDataDir, "account-sessions.db"));
+  if (g.__dockAccountDb) return g.__dockAccountDb;
+  if (!existsSync(dockDataDir)) mkdirSync(dockDataDir, { recursive: true });
+  const conn = new Database(join(dockDataDir, "account-sessions.db"));
   conn.pragma("journal_mode = WAL");
   conn.exec(
     `CREATE TABLE IF NOT EXISTS account_sessions (
@@ -28,7 +28,7 @@ function db(): Database.Database {
        created_at INTEGER NOT NULL
      )`,
   );
-  g.__homeAccountDb = conn;
+  g.__dockAccountDb = conn;
   return conn;
 }
 

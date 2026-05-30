@@ -20,10 +20,10 @@ import { useSession } from "@/lib/solid/session";
 import { podRootFromWebId } from "@/lib/solid/pod-client";
 import { readProfileFromPod, type Profile } from "@/lib/solid/profile";
 import { ensureSeeded, writeApps, DEFAULT_APPS, type AppEntry } from "@mind-studio/core/apps";
-import { hueFor } from "@/lib/home/accents";
+import { hueFor } from "@/lib/dock/accents";
 import { TopBar } from "@/components/TopBar";
 
-export default function HomePage() {
+export default function DockPage() {
   const { webid, loggedIn, loading, fetch: solidFetch, signOut } = useSession();
   const router = useRouter();
 

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { loginAccount, CssApiError } from "@/lib/solid/css-account";
-import { createSession } from "@/lib/home/account-session";
+import { createSession } from "@/lib/dock/account-session";
 import { podBaseUrl } from "@/lib/env";
 
 export const runtime = "nodejs";

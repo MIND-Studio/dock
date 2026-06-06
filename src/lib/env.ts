@@ -12,7 +12,7 @@
 export const oidcIssuer =
   process.env.NEXT_PUBLIC_SOLID_ISSUER ??
   process.env.NEXT_PUBLIC_OIDC_ISSUER ??
-  "https://pod.mindpods.org/";
+  "https://pods.mindpods.org/";
 
 export const podBaseUrl = ensureSlash(
   process.env.NEXT_PUBLIC_POD_BASE_URL ?? "http://localhost:3082/",

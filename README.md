@@ -1,4 +1,4 @@
-# mind-dock-v0
+# dock
 
 The **branded front door** to a Mind pod — an **app launcher**, a
 **profile** editor, and **account management**. The React hub on the shared
@@ -26,14 +26,14 @@ npm install
   account (a separate sign-in, handled server-side).
 
 It deliberately does NOT reimplement the OIDC login/consent screens — those are
-rendered by your pod's own server (themed separately in `mind-codespaces-v0`).
+rendered by your pod's own server (themed separately in [codespaces](https://github.com/MIND-Studio/codespaces)).
 
 ## Dev setup
 
 ```bash
 docker compose up -d        # local CommunitySolidServer on :3082 (persona: alice)
 npm install
-npm run dev                 # mind-dock on :3080
+npm run dev                 # dock on :3080
 ```
 
 Open <http://localhost:3080>, sign in (issuer `http://localhost:3082/`,
@@ -41,7 +41,7 @@ Open <http://localhost:3080>, sign in (issuer `http://localhost:3082/`,
 
 ## Architecture note — two sessions
 
-mind-dock holds your **WebID session** (browser) for pod reads/writes (profile,
+dock holds your **WebID session** (browser) for pod reads/writes (profile,
 app registry). **Account management** needs your **pod-account** sign-in (a
 different credential), held **server-side** by `/api/account/*` — the CSS account
 cookie never reaches the browser and is encrypted at rest. See `AGENTS.md`.
@@ -50,7 +50,7 @@ cookie never reaches the browser and is encrypted at rest. See `AGENTS.md`.
 
 | Service | Port |
 |---|---|
-| mind-dock (Next.js) | 3080 |
+| dock (Next.js) | 3080 |
 | CommunitySolidServer | 3082 |
 
 (`:3081` / `:3083` belong to mind-hermes.)

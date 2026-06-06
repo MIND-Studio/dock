@@ -2,7 +2,7 @@
 
 This version (16.2.6) has breaking changes — APIs, conventions, and file structure may all differ from your training data. Read the relevant guide in `node_modules/next/dist/docs/` before writing any code. Heed deprecation notices.
 
-# mind-dock-v0 — agent rules
+# dock — agent rules
 
 The **branded front door** to a user's Solid pod: an **app launcher**
 (tiles to the sibling Mind apps), a **profile** editor, and **account management**

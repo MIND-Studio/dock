@@ -1,4 +1,4 @@
-# mind-dock-v0 — dev compose
+# dock — dev compose
 #
 # A local CommunitySolidServer v7 instance on :3082 hosting the demo persona
 # (alice). mind-dock itself runs on :3080 (npm run dev). Ports use 308x to

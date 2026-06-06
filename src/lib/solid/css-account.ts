@@ -7,7 +7,7 @@ import "server-only";
  * separate account credential + a pod-origin cookie. We do that here, server-side,
  * with a cookie jar — never exposing the account cookie to the browser.
  *
- * Cookie-jar plumbing adapted from mind-codespaces-v0/src/lib/solid/css-account.ts.
+ * Cookie-jar plumbing adapted from codespaces/src/lib/solid/css-account.ts.
  */
 
 type CookieJar = Map<string, string>;

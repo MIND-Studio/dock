@@ -18,8 +18,18 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" data-mind-theme="mind" suppressHydrationWarning>
-      <body className={`${display.variable} ${body.variable} ${mono.variable}`}>
+    // Font variables go on <html> so globals.css `:root` (= <html>) can consume
+    // them: custom properties only inherit downward, so when they were set on
+    // <body> the `:root { --font-display: var(--font-fraunces) }` aliases
+    // resolved to empty and everything fell back to serif. (next-themes adds the
+    // `dark` class to <html> at runtime — suppressHydrationWarning covers it.)
+    <html
+      lang="en"
+      data-mind-theme="mind"
+      className={`${display.variable} ${body.variable} ${mono.variable}`}
+      suppressHydrationWarning
+    >
+      <body>
         <ThemeProvider
           theme={mind}
           defaultTheme="dark"

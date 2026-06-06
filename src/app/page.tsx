@@ -8,12 +8,12 @@ import { oidcIssuer, APP_NAME, ACCENT } from "@/lib/config";
 import { hueFor } from "@/lib/dock/accents";
 import { BrandMark } from "@/components/TopBar";
 
+// Decorative preview of the shipped app suite (mirrors @mind-studio/core's
+// DEFAULT_APPS). Keep in sync as apps ship.
 const MOCK = [
-  { key: "builder", icon: "🛠️", label: "Builder" },
+  { key: "dock", icon: "🧭", label: "Dock" },
   { key: "drive", icon: "📁", label: "Drive" },
-  { key: "chat", icon: "💬", label: "Chat" },
-  { key: "social", icon: "🌐", label: "Social" },
-  { key: "market", icon: "🛒", label: "Market" },
+  { key: "builder", icon: "🛠️", label: "Builder" },
   { key: "codespaces", icon: "🧰", label: "Codespaces" },
 ];
 

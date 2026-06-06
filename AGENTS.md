@@ -33,9 +33,12 @@ default. `globals.css` does `@import "../../node_modules/@mind-studio/ui/dist/st
 `@source "../../node_modules/@mind-studio/ui/dist"`; `layout.tsx` sets
 `<html data-mind-theme="mind">` + `<ThemeProvider theme={mind} defaultTheme="dark"
 enableSystem={false} storageKey="mind-dock-theme-v1">`. Build UI from `@mind-studio/ui`
-components. Consumed as packed tarballs (`@mind-studio/ui` = `../../ui/mind-studio-ui-0.1.0.tgz`,
-`@mind-studio/core` = `../mind-shared-ui/...tgz`); after changing those, rebuild + pack +
-`npm install <tgz>`. See memory `mind_ui_consumption_gotchas`.
+components. Both `@mind-studio/ui` and `@mind-studio/core` install from **GitHub
+Packages** (registry deps, `package.json` pins `^0.1.0`); a committed `.npmrc`
+scopes `@mind-studio` to `npm.pkg.github.com` — export a token with `read:packages`
+(`export NODE_AUTH_TOKEN=<PAT>`) before `npm install`. To iterate on the shared
+packages locally, bump+publish them, or `npm install` a local `npm pack` tarball
+as a temporary override.
 
 Voice = for everyone, plain words. No "WebID/OIDC/RDF/Turtle" in user-facing copy —
 say "your account", "your apps", "your profile", "your private space".

@@ -3,6 +3,7 @@ import { Fraunces, Hanken_Grotesk, JetBrains_Mono } from "next/font/google";
 import { ThemeProvider } from "@mind-studio/ui";
 import { mind } from "@mind-studio/ui/themes";
 import "./globals.css";
+import { FeedbackLauncher } from "@/components/FeedbackLauncher";
 
 // Distinctive type: a soft optical serif for display, a warm grotesque for body,
 // a mono for micro-labels. Exposed as CSS vars consumed in globals.css.
@@ -39,6 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           <div className="aurora" aria-hidden />
           <div className="grain" aria-hidden />
           {children}
+          <FeedbackLauncher />
         </ThemeProvider>
       </body>
     </html>

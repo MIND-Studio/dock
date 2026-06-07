@@ -61,3 +61,11 @@ OK to log: WebID, route, status, latency, event type.
 ## Ports
 
 Dev app `:3080`, own CSS `:3082` (`:3081`/`:3083` belong to mind-hermes).
+
+## Commits & releases
+
+Use [Conventional Commits](https://www.conventionalcommits.org) on `main`
+(`fix:` → patch, `feat:` → minor, `feat!:` / `BREAKING CHANGE:` → major). Releases,
+tags, and `CHANGELOG.md` are automated by **release-please** — never tag manually
+or hand-edit `CHANGELOG.md`. To cut a release, merge the open
+"chore(main): release X.Y.Z" PR. See the README's Releases section.

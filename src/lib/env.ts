@@ -15,7 +15,7 @@ export const oidcIssuer =
   "https://pods.mindpods.org/";
 
 export const podBaseUrl = ensureSlash(
-  process.env.NEXT_PUBLIC_POD_BASE_URL ?? "http://localhost:3082/",
+  process.env.NEXT_PUBLIC_POD_BASE_URL ?? "http://localhost:3011/",
 );
 
 // ---- Server-only ----------------------------------------------------------

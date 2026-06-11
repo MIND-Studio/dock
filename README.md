@@ -31,13 +31,13 @@ rendered by your pod's own server (themed separately in [codespaces](https://git
 ## Dev setup
 
 ```bash
-docker compose up -d        # local CommunitySolidServer on :3082 (persona: alice)
+(cd ../.. && docker compose up -d)  # shared Mind CSS on :3011 (see ../../SOLID-SERVER.md)
 npm install
 npm run dev                 # dock on :3080
 ```
 
-Open <http://localhost:3080>, sign in (issuer `http://localhost:3082/`,
-`alice@mind-dock.local` / `dev-only-do-not-use-in-prod`).
+Open <http://localhost:3080>, sign in (issuer `http://localhost:3011/`,
+`alice@mind.local` / `dev-only-do-not-use-in-prod`).
 
 ## Architecture note — two sessions
 
@@ -51,7 +51,7 @@ cookie never reaches the browser and is encrypted at rest. See `AGENTS.md`.
 | Service | Port |
 |---|---|
 | dock (Next.js) | 3080 |
-| CommunitySolidServer | 3082 |
+| Pod host | shared Mind pod server (mind-node) `:3011` (see ../../SOLID-SERVER.md) |
 
 (`:3081` / `:3083` belong to mind-hermes.)
 

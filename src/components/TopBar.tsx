@@ -1,6 +1,6 @@
 "use client";
 
-import Link from "next/link";
+import { MindAppLauncher } from "@mind-studio/core/launcher";
 import {
   Avatar,
   AvatarFallback,
@@ -13,7 +13,7 @@ import {
   DropdownMenuTrigger,
   useMindTheme,
 } from "@mind-studio/ui";
-import { MindAppLauncher } from "@mind-studio/core/launcher";
+import Link from "next/link";
 
 export function BrandMark({ size = 32 }: { size?: number }) {
   return (
@@ -23,7 +23,8 @@ export function BrandMark({ size = 32 }: { size?: number }) {
         width: size,
         height: size,
         fontSize: size * 0.5,
-        boxShadow: "0 0 0 1px color-mix(in oklch, white 10%, transparent), 0 6px 18px -6px var(--primary)",
+        boxShadow:
+          "0 0 0 1px color-mix(in oklch, white 10%, transparent), 0 6px 18px -6px var(--primary)",
       }}
     >
       ✦
@@ -76,14 +77,20 @@ export function TopBar({
               <button className="rounded-full outline-none ring-offset-2 transition focus-visible:ring-2 focus-visible:ring-primary">
                 <Avatar className="size-9 ring-1 ring-[color:var(--border)] transition hover:ring-primary/60">
                   {avatarUri ? <AvatarImage src={avatarUri} alt={name} /> : null}
-                  <AvatarFallback className="bg-primary text-primary-foreground">{initial}</AvatarFallback>
+                  <AvatarFallback className="bg-primary text-primary-foreground">
+                    {initial}
+                  </AvatarFallback>
                 </Avatar>
               </button>
             </DropdownMenuTrigger>
             <DropdownMenuContent align="end" className="w-56">
               <DropdownMenuLabel>
                 <div className="truncate font-medium">{name || "Your account"}</div>
-                {webHost ? <div className="truncate font-mono text-[11px] font-normal text-muted-foreground">{webHost}</div> : null}
+                {webHost ? (
+                  <div className="truncate font-mono text-[11px] font-normal text-muted-foreground">
+                    {webHost}
+                  </div>
+                ) : null}
               </DropdownMenuLabel>
               <DropdownMenuSeparator />
               <DropdownMenuItem asChild>

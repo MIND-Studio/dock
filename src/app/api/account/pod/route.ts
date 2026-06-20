@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
-import { createPod, CssApiError } from "@/lib/solid/css-account";
+import { NextResponse } from "next/server";
 import { getSession } from "@/lib/dock/account-session";
+import { CssApiError, createPod } from "@/lib/solid/css-account";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";
@@ -9,9 +9,11 @@ export const dynamic = "force-dynamic";
 export async function POST(req: Request) {
   const id = (await cookies()).get("mh_account")?.value;
   const session = getSession(id);
-  if (!session) return NextResponse.json({ error: "Not signed in to your account." }, { status: 401 });
+  if (!session)
+    return NextResponse.json({ error: "Not signed in to your account." }, { status: 401 });
   const { name } = (await req.json().catch(() => ({}))) as { name?: string };
-  if (!name?.trim()) return NextResponse.json({ error: "A pod name is required." }, { status: 400 });
+  if (!name?.trim())
+    return NextResponse.json({ error: "A pod name is required." }, { status: 400 });
   try {
     await createPod(session, name.trim());
     return NextResponse.json({ ok: true });

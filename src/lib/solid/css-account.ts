@@ -13,7 +13,10 @@ import "server-only";
 type CookieJar = Map<string, string>;
 
 export class CssApiError extends Error {
-  constructor(message: string, public readonly status: number) {
+  constructor(
+    message: string,
+    public readonly status: number,
+  ) {
     super(message);
     this.name = "CssApiError";
   }
@@ -47,7 +50,9 @@ function mergeSetCookies(jar: CookieJar, setCookies: string[]): void {
 }
 
 function cookieHeader(jar: CookieJar): string {
-  return Array.from(jar.entries()).map(([k, v]) => `${k}=${v}`).join("; ");
+  return Array.from(jar.entries())
+    .map(([k, v]) => `${k}=${v}`)
+    .join("; ");
 }
 
 async function req(
@@ -136,7 +141,9 @@ export async function getAccountState(s: AccountSession): Promise<AccountState> 
 
   const podsRes = account["pod"] ? await req(account["pod"], jar) : { body: null };
   const webIdRes = account["webId"] ? await req(account["webId"], jar) : { body: null };
-  const credRes = account["clientCredentials"] ? await req(account["clientCredentials"], jar) : { body: null };
+  const credRes = account["clientCredentials"]
+    ? await req(account["clientCredentials"], jar)
+    : { body: null };
 
   const pods = Object.keys(asMap(podsRes.body, ["pods", "podLinks", "pod"]));
   const webIds = Object.keys(asMap(webIdRes.body, ["webIdLinks", "webIds", "webId"]));
@@ -153,23 +160,41 @@ export async function createPod(s: AccountSession, name: string): Promise<void> 
   if (!account["pod"]) throw new CssApiError("This pod host doesn’t allow creating pods.", 500);
   const res = await req(account["pod"], jar, { method: "POST", body: { name } });
   if (res.status >= 400) {
-    throw new CssApiError((res.body?.["message"] as string) || "Couldn’t create that pod.", res.status);
+    throw new CssApiError(
+      (res.body?.["message"] as string) || "Couldn’t create that pod.",
+      res.status,
+    );
   }
 }
 
 /** Mint a client credential (machine token) for the account's first WebID. */
-export async function createCredential(s: AccountSession, name: string): Promise<{ id?: string; secret?: string }> {
+export async function createCredential(
+  s: AccountSession,
+  name: string,
+): Promise<{ id?: string; secret?: string }> {
   const jar: CookieJar = new Map(Object.entries(s.cookies));
   const account = await authedControls(s, jar);
-  if (!account["clientCredentials"]) throw new CssApiError("Credentials aren’t available here.", 500);
-  const webIds = account["webId"] ? Object.keys(asMap((await req(account["webId"], jar)).body, ["webIdLinks", "webIds"])) : [];
+  if (!account["clientCredentials"])
+    throw new CssApiError("Credentials aren’t available here.", 500);
+  const webIds = account["webId"]
+    ? Object.keys(asMap((await req(account["webId"], jar)).body, ["webIdLinks", "webIds"]))
+    : [];
   const webId = webIds[0];
   if (!webId) throw new CssApiError("Link a WebID before creating credentials.", 400);
-  const res = await req(account["clientCredentials"], jar, { method: "POST", body: { name, webId } });
+  const res = await req(account["clientCredentials"], jar, {
+    method: "POST",
+    body: { name, webId },
+  });
   if (res.status >= 400) {
-    throw new CssApiError((res.body?.["message"] as string) || "Couldn’t create the credential.", res.status);
+    throw new CssApiError(
+      (res.body?.["message"] as string) || "Couldn’t create the credential.",
+      res.status,
+    );
   }
-  return { id: res.body?.["id"] as string | undefined, secret: res.body?.["secret"] as string | undefined };
+  return {
+    id: res.body?.["id"] as string | undefined,
+    secret: res.body?.["secret"] as string | undefined,
+  };
 }
 
 /** Revoke a client credential by its management resource URL. */

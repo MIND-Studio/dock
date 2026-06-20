@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
 import { cookies } from "next/headers";
+import { NextResponse } from "next/server";
+import { deleteSession, getSession } from "@/lib/dock/account-session";
 import { logoutAccount } from "@/lib/solid/css-account";
-import { getSession, deleteSession } from "@/lib/dock/account-session";
 
 export const runtime = "nodejs";
 export const dynamic = "force-dynamic";

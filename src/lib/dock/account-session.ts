@@ -1,15 +1,10 @@
 import "server-only";
 
+import { createCipheriv, createDecipheriv, createHash, randomBytes } from "node:crypto";
 import { existsSync, mkdirSync } from "node:fs";
 import { join } from "node:path";
-import {
-  createCipheriv,
-  createDecipheriv,
-  createHash,
-  randomBytes,
-} from "node:crypto";
 import Database from "better-sqlite3";
-import { dockDataDir, accountEncryptionKey } from "@/lib/env";
+import { accountEncryptionKey, dockDataDir } from "@/lib/env";
 import type { AccountSession } from "@/lib/solid/css-account";
 
 // --- sqlite singleton (survives Next dev hot-reload) -----------------------
@@ -49,7 +44,9 @@ function decrypt(envelope: string): string {
   if (!ivHex || !tagHex || !ctHex) throw new Error("bad envelope");
   const decipher = createDecipheriv("aes-256-gcm", KEY, Buffer.from(ivHex, "hex"));
   decipher.setAuthTag(Buffer.from(tagHex, "hex"));
-  return Buffer.concat([decipher.update(Buffer.from(ctHex, "hex")), decipher.final()]).toString("utf8");
+  return Buffer.concat([decipher.update(Buffer.from(ctHex, "hex")), decipher.final()]).toString(
+    "utf8",
+  );
 }
 
 // --- public API ------------------------------------------------------------

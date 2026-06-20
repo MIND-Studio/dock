@@ -7,7 +7,7 @@ import {
   getUrl,
   setThing,
 } from "@inrupt/solid-client";
-import { readResource, writeResource, type PodFetch } from "./pod-client";
+import { type PodFetch, readResource, writeResource } from "./pod-client";
 
 // Direct RDF term URIs — avoids the optional @inrupt/vocab-common-rdf dep.
 const FOAF_NAME = "http://xmlns.com/foaf/0.1/name";

@@ -28,8 +28,7 @@ export const dockDataDir = process.env.DOCK_DATA_DIR ?? "./.dock-data";
  * Dev fallback is a fixed string — fine for local single-user dev, NEVER prod.
  */
 export const accountEncryptionKey =
-  process.env.DOCK_ACCOUNT_ENC_KEY ??
-  "dev-only-mind-dock-account-key-32b!!";
+  process.env.DOCK_ACCOUNT_ENC_KEY ?? "dev-only-mind-dock-account-key-32b!!";
 
 function ensureSlash(url: string): string {
   return url.endsWith("/") ? url : `${url}/`;

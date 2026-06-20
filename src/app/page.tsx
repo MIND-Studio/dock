@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect } from "react";
-import { useRouter } from "next/navigation";
 import { MindLoginCard, writeLastIdentity } from "@mind-studio/core";
-import { useSession } from "@/lib/solid/session";
-import { oidcIssuer, APP_NAME } from "@/lib/config";
-import { hueFor } from "@/lib/dock/accents";
+import { useRouter } from "next/navigation";
+import { useEffect } from "react";
 import { BrandMark } from "@/components/TopBar";
+import { APP_NAME, oidcIssuer } from "@/lib/config";
+import { hueFor } from "@/lib/dock/accents";
+import { useSession } from "@/lib/solid/session";
 
 // Decorative preview of the shipped app suite (mirrors @mind-studio/core's
 // DEFAULT_APPS). Keep in sync as apps ship.
@@ -47,8 +47,8 @@ export default function LandingPage() {
             <span className="text-primary">all in one place.</span>
           </h1>
           <p className="mt-5 max-w-md text-[15px] leading-relaxed text-muted-foreground sm:text-lg">
-            One calm place for everything you use — open your apps, manage your profile,
-            look after your account.{" "}
+            One calm place for everything you use — open your apps, manage your profile, look after
+            your account.{" "}
             <span className="font-medium text-foreground">Your data stays yours.</span>
           </p>
 
@@ -80,7 +80,9 @@ export default function LandingPage() {
             </div>
             <div className="px-5 pt-5">
               <p className="eyebrow mb-2">Your space</p>
-              <h2 className="font-display text-xl font-semibold tracking-tight">Good evening, you.</h2>
+              <h2 className="font-display text-xl font-semibold tracking-tight">
+                Good evening, you.
+              </h2>
             </div>
             <div className="grid grid-cols-3 gap-3 p-5">
               {MOCK.map((m, i) => {

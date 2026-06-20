@@ -1,7 +1,5 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
 import {
   Avatar,
   AvatarFallback,
@@ -17,11 +15,13 @@ import {
   TabsTrigger,
   Textarea,
 } from "@mind-studio/ui";
-import { useSession } from "@/lib/solid/session";
-import { podRootFromWebId } from "@/lib/solid/pod-client";
-import { readProfileFromPod, writeProfileToPod, type Profile } from "@/lib/solid/profile";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 import { AccountManager } from "@/components/AccountManager";
 import { TopBar } from "@/components/TopBar";
+import { podRootFromWebId } from "@/lib/solid/pod-client";
+import { type Profile, readProfileFromPod, writeProfileToPod } from "@/lib/solid/profile";
+import { useSession } from "@/lib/solid/session";
 
 export default function SettingsPage() {
   const { webid, loggedIn, loading, fetch: solidFetch, signOut } = useSession();
@@ -56,7 +56,9 @@ export default function SettingsPage() {
       <main className="mx-auto max-w-2xl px-6 pb-24">
         <header className="reveal pt-12 pb-8">
           <p className="eyebrow mb-3">Settings</p>
-          <h1 className="font-display text-4xl font-semibold tracking-tight">Your profile & account</h1>
+          <h1 className="font-display text-4xl font-semibold tracking-tight">
+            Your profile & account
+          </h1>
         </header>
 
         <Tabs defaultValue="profile" className="reveal" style={{ animationDelay: "0.08s" }}>
@@ -88,12 +90,15 @@ function ProfileTab({
   onChange: (p: Profile) => void;
 }) {
   const [profile, setProfile] = useState<Profile>({ displayName: "", bio: "", avatarUri: "" });
-  const [status, setStatus] = useState<"idle" | "loading" | "saving" | "saved" | "error">("loading");
+  const [status, setStatus] = useState<"idle" | "loading" | "saving" | "saved" | "error">(
+    "loading",
+  );
 
   const load = useCallback(async () => {
     if (!podRoot) return;
     const p = await readProfileFromPod(podRoot, podFetch);
-    if (p) setProfile({ displayName: p.displayName, bio: p.bio ?? "", avatarUri: p.avatarUri ?? "" });
+    if (p)
+      setProfile({ displayName: p.displayName, bio: p.bio ?? "", avatarUri: p.avatarUri ?? "" });
     setStatus("idle");
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [podRoot]);
@@ -128,11 +133,17 @@ function ProfileTab({
         <div className="flex items-center gap-4">
           <Avatar className="size-16 ring-1 ring-[color:var(--border)]">
             {profile.avatarUri ? <AvatarImage src={profile.avatarUri} alt="" /> : null}
-            <AvatarFallback className="bg-primary text-xl text-primary-foreground">{initial}</AvatarFallback>
+            <AvatarFallback className="bg-primary text-xl text-primary-foreground">
+              {initial}
+            </AvatarFallback>
           </Avatar>
           <div className="min-w-0">
-            <div className="font-display text-lg font-semibold">{profile.displayName || "Your name"}</div>
-            <p className="truncate text-sm text-muted-foreground">{profile.bio || "Add a short line about you"}</p>
+            <div className="font-display text-lg font-semibold">
+              {profile.displayName || "Your name"}
+            </div>
+            <p className="truncate text-sm text-muted-foreground">
+              {profile.bio || "Add a short line about you"}
+            </p>
           </div>
         </div>
 
@@ -165,11 +176,16 @@ function ProfileTab({
           />
         </div>
         <div className="flex items-center gap-3 pt-1">
-          <Button onClick={() => void save()} disabled={status === "saving" || status === "loading"}>
+          <Button
+            onClick={() => void save()}
+            disabled={status === "saving" || status === "loading"}
+          >
             {status === "saving" ? "Saving…" : "Save profile"}
           </Button>
           {status === "saved" ? <span className="text-sm text-primary">Saved ✓</span> : null}
-          {status === "error" ? <span className="text-sm text-destructive">Couldn’t save — try again.</span> : null}
+          {status === "error" ? (
+            <span className="text-sm text-destructive">Couldn’t save — try again.</span>
+          ) : null}
         </div>
         <p className="text-xs text-muted-foreground">
           Saved to your pod’s profile card. Other Mind apps that read your profile will see it.

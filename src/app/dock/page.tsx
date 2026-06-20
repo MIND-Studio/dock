@@ -1,7 +1,6 @@
 "use client";
 
-import { useCallback, useEffect, useState } from "react";
-import { useRouter } from "next/navigation";
+import { type AppEntry, DEFAULT_APPS, ensureSeeded, writeApps } from "@mind-studio/core/apps";
 import {
   Badge,
   Button,
@@ -16,12 +15,13 @@ import {
   Input,
   Label,
 } from "@mind-studio/ui";
-import { useSession } from "@/lib/solid/session";
-import { podRootFromWebId } from "@/lib/solid/pod-client";
-import { readProfileFromPod, type Profile } from "@/lib/solid/profile";
-import { ensureSeeded, writeApps, DEFAULT_APPS, type AppEntry } from "@mind-studio/core/apps";
-import { hueFor } from "@/lib/dock/accents";
+import { useRouter } from "next/navigation";
+import { useCallback, useEffect, useState } from "react";
 import { TopBar } from "@/components/TopBar";
+import { hueFor } from "@/lib/dock/accents";
+import { podRootFromWebId } from "@/lib/solid/pod-client";
+import { type Profile, readProfileFromPod } from "@/lib/solid/profile";
+import { useSession } from "@/lib/solid/session";
 
 export default function DockPage() {
   const { webid, loggedIn, loading, fetch: solidFetch, signOut } = useSession();
@@ -40,7 +40,9 @@ export default function DockPage() {
 
   useEffect(() => {
     const h = new Date().getHours();
-    setGreeting(h < 5 ? "Still up" : h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening");
+    setGreeting(
+      h < 5 ? "Still up" : h < 12 ? "Good morning" : h < 18 ? "Good afternoon" : "Good evening",
+    );
   }, []);
 
   const load = useCallback(async () => {
@@ -104,18 +106,24 @@ export default function DockPage() {
         <section className="reveal pt-12 pb-10" style={{ animationDelay: "0.04s" }}>
           <p className="eyebrow mb-3">Your space</p>
           <h1 className="font-display text-4xl font-semibold leading-[1.05] tracking-tight sm:text-5xl">
-            {greeting},{" "}
-            <span className="text-primary">{firstName}</span>.
+            {greeting}, <span className="text-primary">{firstName}</span>.
           </h1>
           <p className="mt-3 max-w-md text-[15px] text-muted-foreground">
             Everything you use, in one calm place — and it all lives in your own pod.
           </p>
         </section>
 
-        <div className="reveal mb-5 flex items-end justify-between" style={{ animationDelay: "0.12s" }}>
+        <div
+          className="reveal mb-5 flex items-end justify-between"
+          style={{ animationDelay: "0.12s" }}
+        >
           <div className="flex items-baseline gap-2.5">
             <h2 className="font-display text-xl font-semibold tracking-tight">Your apps</h2>
-            {apps ? <Badge variant="secondary" className="translate-y-[-1px]">{apps.length}</Badge> : null}
+            {apps ? (
+              <Badge variant="secondary" className="translate-y-[-1px]">
+                {apps.length}
+              </Badge>
+            ) : null}
           </div>
           <AddAppDialog onAdd={addApp} busy={busy} />
         </div>
@@ -141,9 +149,19 @@ function AppTile({ app, index, onRemove }: { app: AppEntry; index: number; onRem
   return (
     <div
       className="group reveal relative"
-      style={{ animationDelay: `${0.18 + index * 0.04}s`, ["--h" as string]: String(hue) } as React.CSSProperties}
+      style={
+        {
+          animationDelay: `${0.18 + index * 0.04}s`,
+          ["--h" as string]: String(hue),
+        } as React.CSSProperties
+      }
     >
-      <a href={app.url} target="_blank" rel="noopener noreferrer" className="block focus:outline-none">
+      <a
+        href={app.url}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="block focus:outline-none"
+      >
         <div className="tile flex h-full flex-col p-4">
           <span
             className="grid size-12 place-items-center rounded-2xl text-2xl"
@@ -154,13 +172,21 @@ function AppTile({ app, index, onRemove }: { app: AppEntry; index: number; onRem
           >
             {app.icon}
           </span>
-          <h3 className="mt-3.5 text-[15px] font-semibold tracking-tight text-foreground">{app.label}</h3>
+          <h3 className="mt-3.5 text-[15px] font-semibold tracking-tight text-foreground">
+            {app.label}
+          </h3>
           <p className="mt-0.5 flex-1 text-[12.5px] leading-snug text-muted-foreground">
             {app.blurb || safeHost(app.url)}
           </p>
           <div className="mt-3 flex items-center justify-between">
-            <span className="truncate font-mono text-[10px] text-muted-foreground/70">{safeHost(app.url)}</span>
-            <span className="tile-arrow text-[15px]" style={{ color: "oklch(0.78 0.13 var(--h))" }} aria-hidden>
+            <span className="truncate font-mono text-[10px] text-muted-foreground/70">
+              {safeHost(app.url)}
+            </span>
+            <span
+              className="tile-arrow text-[15px]"
+              style={{ color: "oklch(0.78 0.13 var(--h))" }}
+              aria-hidden
+            >
               ↗
             </span>
           </div>
@@ -229,25 +255,45 @@ function AddAppDialog({
       <DialogContent>
         <DialogHeader>
           <DialogTitle className="font-display">Add an app</DialogTitle>
-          <DialogDescription>Pin any web app to your launcher. It’s saved to your pod.</DialogDescription>
+          <DialogDescription>
+            Pin any web app to your launcher. It’s saved to your pod.
+          </DialogDescription>
         </DialogHeader>
         <div className="grid gap-3 py-1">
           <div className="grid gap-1.5">
             <Label htmlFor="app-label">Name</Label>
-            <Input id="app-label" value={label} onChange={(e) => setLabel(e.target.value)} placeholder="My App" autoFocus />
+            <Input
+              id="app-label"
+              value={label}
+              onChange={(e) => setLabel(e.target.value)}
+              placeholder="My App"
+              autoFocus
+            />
           </div>
           <div className="grid gap-1.5">
             <Label htmlFor="app-url">Link</Label>
-            <Input id="app-url" value={url} onChange={(e) => setUrl(e.target.value)} placeholder="https://…" />
+            <Input
+              id="app-url"
+              value={url}
+              onChange={(e) => setUrl(e.target.value)}
+              placeholder="https://…"
+            />
           </div>
           <div className="grid gap-1.5">
             <Label htmlFor="app-icon">Icon</Label>
-            <Input id="app-icon" value={icon} onChange={(e) => setIcon(e.target.value.slice(0, 2))} className="w-20 text-center text-lg" />
+            <Input
+              id="app-icon"
+              value={icon}
+              onChange={(e) => setIcon(e.target.value.slice(0, 2))}
+              className="w-20 text-center text-lg"
+            />
           </div>
         </div>
         <DialogFooter>
           <DialogClose asChild>
-            <Button variant="ghost" size="sm">Cancel</Button>
+            <Button variant="ghost" size="sm">
+              Cancel
+            </Button>
           </DialogClose>
           <Button
             size="sm"
@@ -269,7 +315,12 @@ function AddAppDialog({
 }
 
 function slug(s: string): string {
-  return s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "") || "app";
+  return (
+    s
+      .toLowerCase()
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "") || "app"
+  );
 }
 function safeHost(url: string): string {
   try {

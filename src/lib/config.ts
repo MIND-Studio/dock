@@ -16,6 +16,3 @@ export const feedbackInbox =
 
 /** Display name used by the shared login card + last-identity hint. */
 export const APP_NAME = "Dock";
-
-/** Mind teal — the default Mind brand accent. */
-export const ACCENT = "#16b88a";

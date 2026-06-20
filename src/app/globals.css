@@ -18,12 +18,6 @@
   --font-mono: var(--font-jb), ui-monospace, "SF Mono", Menlo, monospace;
 }
 
-/* Make the @mind-studio/ui component utilities (font-sans / font-mono) use our type. */
-@theme inline {
-  --font-sans: var(--font-body);
-  --font-mono: var(--font-mono);
-}
-
 html,
 body {
   background: var(--background);

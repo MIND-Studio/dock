@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.3.0](https://github.com/MIND-Studio/dock/compare/v0.2.0...v0.3.0) (2026-06-21)
+
+
+### Features
+
+* replace custom brand mark with design-system Logo (ui[#29](https://github.com/MIND-Studio/dock/issues/29) wave 2) ([#10](https://github.com/MIND-Studio/dock/issues/10)) ([ba3e7e2](https://github.com/MIND-Studio/dock/commit/ba3e7e26c861348bd30071a4b6505745e2104c36))
+
 ## [0.2.0](https://github.com/MIND-Studio/dock/compare/v0.1.4...v0.2.0) (2026-06-20)
 
 

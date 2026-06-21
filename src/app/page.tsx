@@ -1,9 +1,9 @@
 "use client";
 
 import { MindLoginCard, writeLastIdentity } from "@mind-studio/core";
+import { Logo } from "@mind-studio/ui";
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
-import { BrandMark } from "@/components/TopBar";
 import { APP_NAME, oidcIssuer } from "@/lib/config";
 import { hueFor } from "@/lib/dock/accents";
 import { useSession } from "@/lib/solid/session";
@@ -34,8 +34,7 @@ export default function LandingPage() {
   return (
     <main className="mx-auto flex min-h-screen max-w-5xl flex-col px-6 pb-16">
       <header className="reveal flex items-center gap-2.5 py-7">
-        <BrandMark />
-        <span className="font-display text-lg font-semibold tracking-tight">Mind Dock</span>
+        <Logo />
       </header>
 
       <section className="grid flex-1 items-center gap-12 lg:grid-cols-[1.05fr_1fr]">

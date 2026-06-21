@@ -11,26 +11,10 @@ import {
   DropdownMenuLabel,
   DropdownMenuSeparator,
   DropdownMenuTrigger,
+  Logo,
   useMindTheme,
 } from "@mind-studio/ui";
 import Link from "next/link";
-
-export function BrandMark({ size = 32 }: { size?: number }) {
-  return (
-    <span
-      className="grid shrink-0 place-items-center rounded-xl bg-primary text-primary-foreground"
-      style={{
-        width: size,
-        height: size,
-        fontSize: size * 0.5,
-        boxShadow:
-          "0 0 0 1px color-mix(in oklch, white 10%, transparent), 0 6px 18px -6px var(--primary)",
-      }}
-    >
-      ✦
-    </span>
-  );
-}
 
 export function ThemeToggle() {
   const { resolvedMode, setMode } = useMindTheme();
@@ -66,8 +50,7 @@ export function TopBar({
     <header className="sticky top-0 z-30 border-b border-[color:var(--border)] glass-panel">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-6 py-3.5">
         <Link href="/dock" className="flex items-center gap-2.5">
-          <BrandMark />
-          <span className="font-display text-[19px] font-semibold tracking-tight">Mind Dock</span>
+          <Logo />
         </Link>
         <div className="flex items-center gap-1">
           <MindAppLauncher podRoot={podRoot ?? undefined} podFetch={podFetch} manageHref="/dock" />
